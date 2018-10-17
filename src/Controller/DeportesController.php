@@ -8,106 +8,31 @@
 
 namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DeportesController {
-    /*
-    /**
-     * @Route("/deportes")
-    */
-    /*
-    public function inicio(){
+class DeportesController extends Controller{
+
+
+    public function inicio()
+    {
         return new Response('Mi página de deportes!');
     }
-    /*
-    /**
-     * @Route("/deportes/primer-articulo")
-    */
-    /*
-    public function mostrar(){
-        return new Response('Mi primera ruta en Symfony!');
-    }
-
 
     /**
-     * @Route("/deportes/{slug}")
+     * @Route("/deportes/{section}/{page}", name="lista_paginas",
+     *      requirements={"page"="\d+"},
+     *      defaults={"section":"tenis"})
     */
-    /*
-    public function mostrar($slug){
-        return new Response(sprintf('Mi artículo en mi página de deportes: ruta %s',$slug));
-    }*/
-    /*
-    /**
-     * @Route("/deportes/{seccion}/{pagina}",name="lista_paginas")
-    */
-    /*
-    public function lista($seccion,$pagina){
-        return new Response(sprintf('Deportes seccion: seccion %s, listado de noticias página %s',$seccion,$pagina));
+    public function lista($page = 1,$section){
+        //Simulamos una base de datos de deportes
+        $sports=["futbol","tenis","rugby"];
+        //Si el deporte que buscamos no se encuentra lanzamos la excepción 404 deporte no encontrado
+        if(!in_array($section,$sports)){
+            throw $this->createNotFoundException('Error 404 este deporte no está en nuestra Base de Datos');
+        }
+        return new Response(sprintf('Deportes sección: sección %s, listado de noticias página %s',$section, $page));
     }
-    */
-    /*
-    /**
-     * @Route("/deportes/{seccion}/{pagina}",name="lista_paginas",
-     *     requirements={"pagina"="\d+"})
-    */
-    /*
-    public function lista($seccion,$pagina=1){
-       return new Response(sprintf('Deportes seccion: seccion %s, listado de noticias página %s',$seccion,$pagina));
-   }
-   */
-   /*
-       /**
-        * @Route("/deportes/{seccion}/{pagina}",name="lista_paginas",
-        *     requirements={"pagina"="\d+"},
-        *     defaults={"seccion":"tenis"})
-       */
-    /*
-    public function lista($seccion,$pagina=1){
-           return new Response(sprintf('Deportes seccion: seccion %s, listado de noticias página %s',$seccion,$pagina));
-    }
-*/
-    /*
-    /**
-     * @Route("/deportes/{seccion}/{slug} ",
-     * defaults={"seccion":"tenis"})
-     */
-    /*
-    public function noticia($slug, $seccion) {
-
-        return new Response(sprintf( 'Noticia de %s, con url dinámica=%s', $seccion, $slug));
-    }
-*/
-    /**
-     * @Route(
-     *    "/deportes/{_idioma}/{fecha}/{seccion}/{equipo}/{slug}.{_formato}",
-     *     defaults={"slug": "1","_formato":"html"},
-     *     requirements={
-     *         "_idioma": "es|en",
-     *         "_formato": "html|json|xml",
-     *          "fecha": "[\d+]{8}"
-     *     }
-     * )
-     */
-    public function rutaAvanzada($_idioma,$fecha, $seccion, $equipo, $slug) {
-        return new Response(sprintf( 'Mi noticia en idioma=%s, fecha=%s,deporte=%s,equipo=%s, noticia=%s ', $_idioma, $fecha, $seccion, $equipo, $slug));
-    }
-
-    /**
-     * @Route(
-     *     "/deportes/{_idioma}/{fecha}/{seccion}/{equipo}/{pagina}",
-     *     defaults={"slug": "1","_formato":"html","pagina":"1"},
-     *     requirements={
-     *         "_idioma": "es|en",
-     *         "_formato": "html|json|xml",
-     *         "fecha": "[\d+]{8}",
-     *         "pagina"="\d+"
-     *     }
-     * )
-     */
-    public function rutaAvanzadaListado($_idioma,$fecha, $seccion, $equipo, $pagina) {
-        return new Response(sprintf('Listado de noticias  en idioma=%s, fecha=%s,deporte=%s,equipo=%s, página=%s ', $_idioma, $fecha, $seccion, $equipo, $pagina));
-    }
-
 
 
 }
