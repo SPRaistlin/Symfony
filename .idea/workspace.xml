@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DeportesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DeportesController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,8 +89,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/DeportesController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="770">
-              <caret line="161" lean-forward="true" selection-start-line="161" selection-end-line="161" />
+            <state relative-caret-position="180">
+              <caret line="17" selection-start-line="17" selection-end-line="160" selection-end-column="5" />
               <folding>
                 <element signature="e#116#139#0#PHP" expanded="true" />
               </folding>
@@ -333,12 +332,12 @@
       <workItem from="1539685176094" duration="703000" />
       <workItem from="1539760666591" duration="795000" />
       <workItem from="1539769410748" duration="5980000" />
-      <workItem from="1540194628393" duration="3628000" />
+      <workItem from="1540194628393" duration="4700000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16745000" />
+    <option name="totallyTimeSpent" value="17817000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1365" y="-11" width="1922" height="1092" extended-state="6" />
@@ -398,8 +397,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/DeportesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="161" lean-forward="true" selection-start-line="161" selection-end-line="161" />
+        <state relative-caret-position="180">
+          <caret line="17" selection-start-line="17" selection-end-line="160" selection-end-column="5" />
           <folding>
             <element signature="e#116#139#0#PHP" expanded="true" />
           </folding>
