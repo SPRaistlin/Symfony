@@ -16,14 +16,13 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 
 class DeportesController extends Controller{
-/*
-    /**
-     * @Route("/deportes", name="inicio" )
-     */
-/*
+
+   /**
+    * @Route("/deportes", name="inicio" )
+   */
     public function inicio()
     {
-        return new Response('Mi página de deportes!');
+        return $this->render('base.html.twig');
     }
 
     /*
@@ -47,7 +46,7 @@ class DeportesController extends Controller{
         return new Response(sprintf('Sesión iniciada con el atributo nombre: %s', $usuario
         ));
     }
-
+*
     /**
      * @Route("/deportes/{section}/{page}", name="lista_paginas",
      *      requirements={"page"="\d+"},
@@ -151,14 +150,47 @@ class DeportesController extends Controller{
         $noticiaSec= $repository->findOneBy(['seccion' => $seccion]);
         // Si la sección no existe saltará una excepción
         if(!$noticiaSec) {
-            throw $this->createNotFoundException('Error 404 este deporte no está en nuestra Base de Datos');
+            return $this->render("noticia/404.html.twig",['texto'=>'Error 404 este deporte no está en nuestra Base de Datos']);
         }
         // Almacenamos todas las noticias de una sección en una lista
         $noticias = $repository->findBy([
             "seccion"=>$seccion
         ]);
-        return new Response("Hay un total de ".count($noticias)." noticias de la sección de ".$seccion);
+        return $this->render('noticia/listar.html.twig', [
+            // La función str_replace elimina los símbolos - de los títulos
+            'titulo' => ucwords(str_replace('-', ' ', $seccion)),
+            'noticias'=>$noticias
+        ]);
     }
+
+    /**
+     * @Route("/deportes/{seccion}/{titular} ",
+     * defaults={"seccion":"tenis"}, name="verNoticia")
+     */
+    public function noticia($titular, $seccion)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(Noticia::class);
+        $noticia= $repository->findOneBy(['textoTitular' => $titular]);
+        // Si la noticia que buscamos no se encuentra lanzamos error 404
+        if(!$noticia){
+            // Ahora que controlamos el manejo de plantilla twig, vamos a
+            // redirigir al usuario a la página de inicio
+            // y mostraremos el error 404, para así no mostrar la página de
+            // errores generica de symfony
+            //return $this->render('noticia/404.html.twig');
+            return $this->render("noticia/404.html.twig",[
+                'texto'=>"Error 404 Página no encontrada"
+            ]);
+        }
+        return $this->render('noticia/noticia.html.twig', [
+            // Parseamos el titular para quitar los símbolos -
+            'titulo' => ucwords(str_replace('-', ' ', $titular)),
+            'noticias'=>$noticia
+
+        ]);
+    }
+
 
 
 }
